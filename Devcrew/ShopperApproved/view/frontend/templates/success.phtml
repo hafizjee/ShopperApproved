@@ -1,0 +1,31 @@
+<?php
+/**
+ * @Vendor    Devcrew
+ * @Module    Devcrew_ShopperApproved
+ * @User      Hafiz Arslan
+ * @Copyright Copyright (c) dercrew.io, Inc. (https://devcrew.io/)
+ */
+?>
+
+<?php
+		$helper           = $this->helper('Devcrew\ShopperApproved\Helper\Data');
+		$blockObj         = $block->getLayout()->createBlock('Devcrew\ShopperApproved\Block\Success');
+		$orderId          = $blockObj-> getRealOrderId();
+		$order            = $blockObj-> getOrder();
+		$products         = array();?>
+		<?php if ($helper->isEnabled()): ?>
+		<?php foreach ($order->getAllItems() as $item): ?>
+		<?php $products[$item->getProduct()->getData('sku')] = $item->getProduct()->getDescription(); ?>
+		<?php endforeach; ?>
+		    <script type="text/javascript">
+		        /* Include all products in the following object using the key value pairs: 'product id':'Product Name' */
+		        var sa_products = <?php echo json_encode($products); ?>;
+		        var sa_values = {
+		            "site"://site id ,
+		            "token"://tocken "",
+		            'orderid': '<?php echo $orderId ?>"',
+		            'name': '<?php echo $order->getCustomerName() ?>',
+		            'email': '<?php echo $order->getShippingAddress()->getEmail() ?>'
+		        };
+						// paste your shopperapproved script here
+		<?php endif; ?>

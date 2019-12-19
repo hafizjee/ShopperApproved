@@ -1,0 +1,28 @@
+<?php
+/**
+ * @Vendor    Devcrew
+ * @Module    Devcrew_ShopperApproved
+ * @User      Hafiz Arslan
+ * @Copyright Copyright (c) dercrew.io, Inc. (https://devcrew.io/)
+ */
+?>
+
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//Get current product via ObjectManager
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$helper = $this->helper('Devcrew\ShopperApproved\Helper\Data');
+    if ($helper->isEnabled()):?>
+        <!-- Shopper Approved Start -->
+    <div class="box-collateral product-breadcrumbs">
+     <h2>Additional Reviews</h2>
+     <div class="box-collateral-content">
+
+      <?php
+      // give your product sku in code
+      //  var sa_product = '<?php echo $product->getSku(); ?>';
+        <!-- paste your shopperapproved script here -->
+     </div>
+ </div>
+<?php endif; ?>
+        <!-- Shopper Approved End -->
